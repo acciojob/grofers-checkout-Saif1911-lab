@@ -6,25 +6,22 @@ const getSum = () => {
   const prices = document.querySelectorAll(".prices");
   let total = 0;
 
-  prices.forEach(p => {
-    total += Number(p.innerText);
+  prices.forEach(price => {
+    total += Number(price.innerText);
   });
 
-  const table = document.querySelector("table");
+  // remove previous answer if exists
+  const oldAns = document.getElementById("ans");
+  if (oldAns) {
+    oldAns.remove();
+  }
 
-  // Prevent duplicate total row
-  const oldRow = document.getElementById("total");
-  if (oldRow) oldRow.remove();
+  // create required #ans element
+  const ans = document.createElement("div");
+  ans.id = "ans";
+  ans.innerText = total;
 
-  const row = document.createElement("tr");
-  row.id = "total";
-
-  const cell = document.createElement("td");
-  cell.colSpan = 2;
-  cell.innerText = total;
-
-  row.appendChild(cell);
-  table.appendChild(row);
+  document.body.appendChild(ans);
 };
 
 getSumBtn.addEventListener("click", getSum);
